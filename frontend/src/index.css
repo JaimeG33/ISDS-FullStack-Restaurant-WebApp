@@ -1,11 +1,188 @@
+/* The Burger Lab — design tokens and shared UI (from Figma "Final Design — The Burger Lab").
+   Screen-specific styles live in styles/customer.css and styles/staff.css. */
+
 :root {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #29251e;
-  background: #f8f5ee;
+  --navy: #0a2540;
+  --blue: #1d5fd6;
+  --blue-dark: #1548a8;
+  --sky: #dcebff;
+  --ice: #f3f8ff;
+  --white: #ffffff;
+  --line: #d6e2f2;
+  --grey: #edf1f6;
+  --muted: #5a6b85;
+  --ok: #12804b;
+  --ok-bg: #e3f5ec;
+  --warn: #8a6a00;
+  --warn-bg: #fff6d6;
+  --bad: #c3262e;
+  --bad-bg: #fde8e9;
+
+  --font-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+  --font-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  font-family: var(--font-body);
+  color: var(--navy);
+  background: var(--ice);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; }
+body { margin: 0; min-width: 320px; background: var(--ice); }
+h1, h2, h3, p { margin: 0; }
+img { display: block; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+a { color: inherit; text-decoration: none; }
+input { font: inherit; }
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
+
+.display { font-family: var(--font-display); font-weight: 800; font-variation-settings: 'opsz' 14; }
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--muted); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Eyebrow label: "PICKUP CONTACT", "ALLERGENS" … */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Logo */
+.logo { display: inline-flex; align-items: center; gap: 10px; }
+.logo__stack { display: flex; flex-direction: column; }
+.logo__eyebrow { font-family: var(--font-mono); font-weight: 700; font-size: 9px; letter-spacing: 0.3em; color: var(--blue); }
+.logo__name {
+  font-family: var(--font-display); font-weight: 800; font-variation-settings: 'opsz' 14;
+  font-size: 21px; letter-spacing: -0.02em; color: var(--navy); line-height: 1.2;
+}
+.logo--dark .logo__eyebrow { color: var(--sky); }
+.logo--dark .logo__name { color: var(--white); }
+
+/* Status pills */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 99px;
+  font-family: var(--font-mono); font-weight: 700; font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; white-space: nowrap;
+}
+.pill__dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill--ok { background: var(--ok-bg); color: var(--ok); }
+.pill--blue { background: var(--sky); color: var(--blue-dark); }
+.pill--warn { background: var(--warn-bg); color: var(--warn); }
+.pill--bad { background: var(--bad-bg); color: var(--bad); }
+.pill--grey { background: var(--grey); color: var(--muted); }
+
+/* Modifier chips: "+1 patty", "No onion" */
+.chip { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+.chip--add { background: var(--sky); color: var(--blue-dark); }
+.chip--remove { background: var(--grey); color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 12px; font-weight: 700; font-size: 15px; line-height: 1.2; white-space: nowrap;
+  border: 1.5px solid transparent; transition: background-color 0.15s, border-color 0.15s, transform 0.05s;
+}
+.btn--md { padding: 12px 22px; }
+.btn--sm { padding: 7px 14px; font-size: 13px; border-radius: 10px; }
+.btn--block { width: 100%; }
+.btn--primary { background: var(--blue); color: var(--white); }
+.btn--primary:hover:not(:disabled) { background: var(--blue-dark); }
+.btn--secondary { background: var(--white); color: var(--blue-dark); border-color: var(--line); }
+.btn--secondary:hover:not(:disabled) { border-color: var(--blue); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:disabled { background: var(--grey); color: var(--muted); border-color: transparent; }
+
+/* Text links styled as buttons ("Edit", "Remove", "See full menu →") */
+.text-btn { background: none; border: 0; padding: 0; font-weight: 700; font-size: 14px; color: var(--blue); }
+.text-btn--bad { color: var(--bad); }
+.text-btn:hover { text-decoration: underline; }
+
+/* Quantity stepper */
+.stepper {
+  display: inline-flex; align-items: center; background: var(--white);
+  border: 1.5px solid var(--line); border-radius: 99px;
+}
+.stepper button {
+  background: none; border: 0; padding: 6px 12px; font-size: 17px; font-weight: 700; color: var(--blue); line-height: 1.2;
+}
+.stepper button:disabled { color: var(--line); }
+.stepper__value { min-width: 20px; text-align: center; font-weight: 700; font-size: 15px; }
+
+/* On/off switch (44×24) */
+.toggle {
+  position: relative; width: 44px; height: 24px; flex: none; padding: 0; border: 0;
+  border-radius: 99px; background: var(--line); transition: background-color 0.15s;
+}
+.toggle__knob {
+  position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--white); box-shadow: 0 1px 2px rgb(10 38 64 / 0.2); transition: transform 0.15s;
+}
+.toggle--on { background: var(--blue); }
+.toggle--on .toggle__knob { transform: translateX(20px); }
+
+/* Form fields */
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1; }
+.field__label { font-weight: 600; font-size: 13.5px; }
+.field__input {
+  width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px;
+  background: var(--white); color: var(--navy); font-size: 15px;
+}
+.field__input::placeholder { color: var(--muted); }
+.field__input:focus { outline: none; border: 2px solid var(--blue); padding: 11.5px 13.5px; }
+.field__input--mono { font-family: var(--font-mono); font-weight: 500; }
+.field__input--error { border-color: var(--bad); }
+.field__error { color: var(--bad); font-size: 12.5px; font-weight: 600; }
+
+/* Segmented control: "Continue as guest | Sign in", "Restock | Correction" */
+.segmented { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+.segmented button { border: 0; background: none; padding: 9px 16px; border-radius: 9px; font-weight: 600; font-size: 14px; color: var(--muted); }
+.segmented button[aria-pressed='true'] { background: var(--blue); color: var(--white); font-weight: 700; }
+
+/* Filter chips: "All / Burgers / …", "Today / This week" */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter {
+  padding: 8px 16px; border-radius: 99px; border: 1.5px solid var(--line); background: var(--white);
+  font-weight: 600; font-size: 14px; color: var(--navy);
+}
+.filter[aria-pressed='true'] { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+/* Cards and boxes */
+.card { background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+.math { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-radius: 10px; background: var(--ice); font-family: var(--font-mono); font-weight: 500; font-size: 13px; }
+.math__row { display: flex; justify-content: space-between; gap: 12px; }
+.math__row--total { font-weight: 700; }
+.math hr { border: 0; border-top: 1px solid var(--line); margin: 0; width: 100%; }
+
+.divider { height: 1px; background: var(--line); border: 0; margin: 0; width: 100%; }
+
+.sum-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 15px; }
+.sum-row > :first-child { color: var(--muted); }
+.sum-row--total > :first-child { color: var(--navy); font-weight: 700; font-size: 16px; }
+.sum-row--total > :last-child { font-family: var(--font-display); font-weight: 800; font-size: 24px; }
+
+.demo-note {
+  font-size: 12.5px; color: var(--muted); text-align: center;
+}
+
+/* Data tables (staff screens) */
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th {
+  background: var(--ice); text-align: left; padding: 12px 16px;
+  font-family: var(--font-mono); font-weight: 700; font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); white-space: nowrap;
+}
+.table td { padding: 12px 16px; border-top: 1px solid var(--line); white-space: nowrap; }
+.table .num { text-align: right; }
+.table tbody tr.clickable { cursor: pointer; }
+.table tbody tr.clickable:hover td { background: var(--ice); }
+.table-wrap { overflow-x: auto; }
