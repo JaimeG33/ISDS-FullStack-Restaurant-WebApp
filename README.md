@@ -1,7 +1,7 @@
 # ISDS Full-Stack Restaurant Web App
 
-Restaurant ordering capstone starter: React, TypeScript, and Vite, with space
-for a future backend and MySQL database work.
+Restaurant ordering capstone using React, TypeScript, and Vite, with a TypeScript
+catalog connection-test API for the existing RDS MySQL database.
 
 ## Quick start
 
@@ -24,7 +24,7 @@ ISDS Capstone/
     │       ├── pages/                # Screens
     │       ├── data/                 # Sample data
     │       └── services/             # Future API clients
-    ├── backend/                      # Future API
+    ├── backend/                      # Catalog connection-test API
     ├── database/                     # Schema, migrations, seed data
     ├── docs/                         # Setup and design references
     └── package.json                  # Commands run from the repo root
@@ -40,6 +40,10 @@ ISDS Capstone/
 | `npm run lint` | Check frontend code with Oxlint |
 | `npm run build` | Type-check and build into `frontend/dist/` |
 | `npm run preview` | Preview the production build after building |
+| `npm run dev:backend` | Start the local catalog connection-test API |
+| `npm run build:backend` | Type-check and bundle the Lambda handler |
+| `npm run test:backend` | Check API responses and failure handling |
+| `npm run package:backend` | Package the handler and downloaded RDS CA bundle |
 
 The development server listens on all interfaces so embedded/cloud previews
 can reach it. For a localhost-only session, run `npm run dev --workspace frontend`.
@@ -66,8 +70,9 @@ git commit -m "Build restaurant UI prototype"
 git push -u origin feature/figma-ui
 ```
 
-The backend and database are placeholders. Ordering, payments, authentication,
-and AWS deployment are not implemented. Keep credentials in ignored local
+See [backend setup](backend/README.md) and [AWS console setup](docs/aws-api-setup.md)
+for the connection-test API and optional menu panel. Ordering, payments, and
+authentication still use prototype behavior. Keep credentials in ignored local
 environment files and keep server secrets out of frontend code.
 
 ### Windows certificate troubleshooting

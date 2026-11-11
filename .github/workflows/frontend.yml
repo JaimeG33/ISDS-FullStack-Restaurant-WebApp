@@ -1,4 +1,4 @@
-name: Frontend checks
+name: Application checks
 on:
   push:
   pull_request:
@@ -16,3 +16,5 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+      - run: npm run test:backend
+      - run: npm run build:backend

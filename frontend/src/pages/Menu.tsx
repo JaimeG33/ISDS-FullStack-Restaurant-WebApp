@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ConnectionTestPanel } from '../components/ConnectionTestPanel'
 import { NavBar, SiteFooter } from '../components/NavBar'
 import { Pill } from '../components/ui'
 import { categories, menu, money, prepLabel, type Category } from '../data/menu'
@@ -14,6 +15,7 @@ export function Menu() {
     <div className="page">
       <NavBar active="menu" />
       <main className="section menu-page">
+        {import.meta.env.VITE_SHOW_CONNECTION_TEST === 'true' && <ConnectionTestPanel />}
         <div className="section__head">
           <h1 className="display page-title page-title--lg">Menu</h1>
           <div className="filters" role="group" aria-label="Filter by category">

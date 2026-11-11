@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.1.0",
   "workspaces": [
-    "frontend"
+    "frontend",
+    "backend"
   ],
   "engines": {
     "node": ">=22.12.0"
@@ -13,6 +14,10 @@
     "start": "npm run dev",
     "build": "npm run build --workspace frontend",
     "lint": "npm run lint --workspace frontend",
-    "preview": "npm run preview --workspace frontend -- --host 0.0.0.0"
+    "preview": "npm run preview --workspace frontend -- --host 0.0.0.0",
+    "dev:backend": "npm run dev --workspace backend",
+    "build:backend": "npm run build --workspace backend",
+    "package:backend": "npm run package --workspace backend",
+    "test:backend": "npm test --workspace backend"
   }
 }

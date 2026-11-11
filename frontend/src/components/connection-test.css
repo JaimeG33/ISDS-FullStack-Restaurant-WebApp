@@ -1,0 +1,16 @@
+.connection-test {
+  width: min(100%, 360px);
+  margin: 0 0 24px auto;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.connection-test h2 { font-size: 16px; margin-bottom: 12px; }
+.connection-test p { margin-bottom: 10px; }
+.connection-test__success { color: var(--ok); font-weight: 700; }
+.connection-test__error { color: var(--bad); font-weight: 700; }
+.connection-test__request { color: var(--muted); overflow-wrap: anywhere; font-size: 12px; }
